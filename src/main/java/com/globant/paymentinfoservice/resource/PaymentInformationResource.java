@@ -1,7 +1,9 @@
 package com.globant.paymentinfoservice.resource;
 
 import com.globant.paymentinfoservice.model.PaymentInformation;
-import com.globant.paymentinfoservice.model.UserNumberOfLessons;
+import com.globant.paymentinfoservice.model.UserLessons;
+import com.globant.paymentinfoservice.repository.UserLessonsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,18 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/payment")
 public class PaymentInformationResource {
 
-    @PostMapping("/pay")
-    public UserNumberOfLessons createPayment(PaymentInformation paymentInformation) {
-        //Process payment
+  private final UserLessonsRepository userLessonsRepository;
 
-        //Call service to update number of total classes.
+  @Autowired
+  public PaymentInformationResource(UserLessonsRepository userLessonsRepository) {
+    this.userLessonsRepository = userLessonsRepository;
+  }
 
-        //Not sure what to return yet.
-        return new UserNumberOfLessons();
-    }
+  @PostMapping("/pay")
+  public UserLessons createPayment(PaymentInformation paymentInformation) {
+    //Process payment
 
-    @GetMapping("/{userId}")
-    public UserNumberOfLessons getNumberOfLessons(@PathVariable("userId") int userId) {
-        return new UserNumberOfLessons(userId, 5);
-    }
+    //Call service to update number of total classes.
+
+    //Not sure what to return yet.
+    return new UserLessons();
+  }
+
+  @GetMapping("/{userId}")
+  public UserLessons getNumberOfLessons(@PathVariable("userId") int userId) {
+    return userLessonsRepository.findByUserId(userId);
+  }
 }

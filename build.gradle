@@ -19,14 +19,17 @@ ext {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.apache.tomcat:tomcat-dbcp:8.0.32'
+	// JAX-B dependencies for JDK 9+
+	implementation "javax.xml.bind:jaxb-api:2.2.11"
+	implementation "com.sun.xml.bind:jaxb-core:2.2.11"
+	implementation "com.sun.xml.bind:jaxb-impl:2.2.11"
+	implementation "javax.activation:activation:1.1.1"
 
-	dependencies {
-		// JAX-B dependencies for JDK 9+
-		implementation "javax.xml.bind:jaxb-api:2.2.11"
-		implementation "com.sun.xml.bind:jaxb-core:2.2.11"
-		implementation "com.sun.xml.bind:jaxb-impl:2.2.11"
-		implementation "javax.activation:activation:1.1.1"
-	}
+	runtimeOnly 'org.postgresql:postgresql'
+
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
