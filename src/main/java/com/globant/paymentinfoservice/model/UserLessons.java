@@ -20,6 +20,10 @@ public class UserLessons {
     this.numberOfRemainingLessons = numberOfRemainingLessons;
   }
 
+  public int addLessons(int numberOfLessons) {
+    return numberOfRemainingLessons += numberOfLessons;
+  }
+
   public int getUserId() {
     return userId;
   }
